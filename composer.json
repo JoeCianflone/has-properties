@@ -1,0 +1,57 @@
+{
+    "name": "inizio/has-properties",
+    "description": "Set all your Eloquent model properties in one place",
+    "keywords": [
+        "inizio",
+        "laravel",
+        "traits",
+        "eloquent",
+        "models"
+    ],
+    "prefer-stable": true,
+    "type": "package",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Inizio\\HasProperties\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Inizio\\HasProperties\\Tests\\": "tests"
+        }
+    },
+    "authors": [
+        {
+            "name": "Joe Cianflone",
+            "email": "JoeCianflone@users.noreply.github.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": "^8.0",
+        "illuminate/contracts": "^9.0"
+    },
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true,
+            "phpstan/extension-installer": true
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/pest",
+        "test-coverage": "vendor/bin/pest --coverage",
+        "check": "vendor/bin/phpstan analyse",
+        "format": "vendor/bin/php-cs-fixer fix"
+    },
+    "require-dev": {
+        "nunomaduro/collision": "^6.0",
+        "nunomaduro/larastan": "^2.0.1",
+        "orchestra/testbench": "^7.0",
+        "pestphp/pest": "^1.21",
+        "pestphp/pest-plugin-laravel": "^1.1",
+        "phpunit/phpunit": "^9.5",
+        "friendsofphp/php-cs-fixer": "^3.8"
+    }
+}
