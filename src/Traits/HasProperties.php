@@ -2,14 +2,14 @@
 
 namespace Inizio\HasProperties\Traits;
 
-use Exception;
 use Illuminate\Support\Collection;
+use Inizio\HasProperties\Exceptions\PropArrayMissingException;
 
 trait HasProperties
 {
     private bool $isFillable = true;
 
-    private bool $defaultGuarded = false;
+    private bool $isGuarded = false;
 
     private bool $isUnguarded = false;
 
@@ -36,8 +36,8 @@ trait HasProperties
     {
         if (property_exists($this, 'massAssignment')) {
             if (strtolower($this->massAssignment) === 'guarded') {
-                $this->defaultFillable = false;
-                $this->defaultGuarded = true;
+                $this->isFillable = false;
+                $this->isGuarded = true;
             } elseif (strtolower($this->massAssignment) === 'unguarded') {
                 $this->isUnguarded = true;
             }
@@ -47,7 +47,7 @@ trait HasProperties
     private function checkPropsArrayExists(): void
     {
         if ( ! property_exists($this, 'props')) {
-            throw new Exception('HasPropertyException: in class '.get_class($this).', $props does not exist');
+            throw new PropArrayMissingException('HasPropertyException: in class '.get_class($this).', $props does not exist');
         }
     }
 
@@ -81,11 +81,11 @@ trait HasProperties
 
     private function setGuardedOrFillable($acc, $prop): array
     {
-        if ($this->defaultFillable && ! in_array($prop, $acc['guarded']) && ! in_array($prop, $acc['fillable'])) {
+        if ($this->isFillable && ! in_array($prop, $acc['guarded']) && ! in_array($prop, $acc['fillable'])) {
             $acc['fillable'][] = $prop;
         }
 
-        if ($this->defaultGuarded && ! in_array($prop, $acc['fillable']) && ! in_array($prop, $acc['guarded'])) {
+        if ($this->isGuarded && ! in_array($prop, $acc['fillable']) && ! in_array($prop, $acc['guarded'])) {
             $acc['guarded'][] = $prop;
         }
 
