@@ -2,61 +2,91 @@
 
 namespace Inizio\HasProperties\Traits;
 
+use Exception;
 use Illuminate\Support\Collection;
 
 trait HasProperties
 {
-    protected bool $unsetProps = true;
+    private bool $isFillable = true;
+
+    private bool $defaultGuarded = false;
+
+    private bool $isUnguarded = false;
 
     protected function initializeHasProperties(): void
     {
-        $normalized = $this->generateProperties($this->props);
+        $this->checkMassAssignment();
+        $this->checkPropsArrayExists();
 
-        $this->attributes = $normalized['attributes'];
-        $this->setHidden($normalized['hidden']);
-        $this->mergeCasts($normalized['casts']);
-        $this->fillable($normalized['fillable']);
-        $this->guard($normalized['guarded']);
+        if (count($this->props) > 0) {
+            $normalized = $this->generateProperties($this->props);
 
-        if ($this->unsetProps) {
-            unset($this->props);
+            $this->attributes = $normalized['attributes'];
+            $this->setHidden($normalized['hidden']);
+            $this->mergeCasts($normalized['casts']);
+            $this->fillable($normalized['fillable']);
+
+            if ($this->isUnguarded || count($normalized['guarded']) > 0) {
+                $this->guard($normalized['guarded']);
+            }
+        }
+    }
+
+    private function checkMassAssignment(): void
+    {
+        if (property_exists($this, 'massAssignment')) {
+            if (strtolower($this->massAssignment) === 'guarded') {
+                $this->defaultFillable = false;
+                $this->defaultGuarded = true;
+            } elseif (strtolower($this->massAssignment) === 'unguarded') {
+                $this->isUnguarded = true;
+            }
+        }
+    }
+
+    private function checkPropsArrayExists(): void
+    {
+        if ( ! property_exists($this, 'props')) {
+            throw new Exception('HasPropertyException: in class '.get_class($this).', $props does not exist');
         }
     }
 
     private function generateProperties(array $props): array
     {
-        return collect($props)->flatMap(function ($item, $type) {
-            return (new Collection($item))->reduce(function ($carry, $i, $k) use ($type) {
-                return match ( ! is_array($i)) {
-                    true => $this->pushToAcc($carry, $type, $i),
-                    false => $this->reduceArray($i, $k, $carry),
-                };
-            }, [
-                'fillable' => [],
-                'guarded' => ['*'],
-                'hidden' => [],
-                'casts' => [],
-                'attributes' => [],
-            ]);
-        })->toArray();
+        $initialPropArray = [
+            'fillable' => [],
+            'guarded' => [],
+            'hidden' => [],
+            'casts' => [],
+            'attributes' => [],
+        ];
+
+        return collect($props)->reduce(function ($acc, $propList, $propName) {
+            if ( ! is_int($propName)) {
+                $acc = collect(new Collection($propList))->reduce(function ($accumulator, $propValue, $propKey) use ($propName) {
+                    match (is_int($propKey)) {
+                        true => $accumulator[$propValue][] = $propName,
+                        false => $accumulator[$propKey][$propName] = $propValue
+                    };
+
+                    return $accumulator;
+                }, $acc);
+
+                return $this->setGuardedOrFillable($acc, $propName);
+            }
+
+            return $this->setGuardedOrFillable($acc, $propList);
+        }, $initialPropArray);
     }
 
-    private function reduceArray(array $value, int|string $key, array $acc = []): array
+    private function setGuardedOrFillable($acc, $prop): array
     {
-        return collect($value)->reduce(function ($c, $i, $k) use ($key) {
-            return match (is_int($k)) {
-                true => $this->pushToAcc($c, $i, $key),
-                false =>  $this->pushToAcc($c, $k, $i, $key),
-            };
-        }, $acc)->toArray();
-    }
+        if ($this->defaultFillable && ! in_array($prop, $acc['guarded']) && ! in_array($prop, $acc['fillable'])) {
+            $acc['fillable'][] = $prop;
+        }
 
-    private function pushToAcc(array $acc, string|int $key, mixed $value, string|int|null $secondary = null): array
-    {
-        if (is_null($secondary)) {
-            $acc[$key][] = $value;
-        } else {
-            $acc[$key][$secondary] = $value;
+        if ($this->defaultGuarded && ! in_array($prop, $acc['fillable']) && ! in_array($prop, $acc['guarded'])) {
+            $acc['guarded'][] = $prop;
         }
 
         return $acc;
