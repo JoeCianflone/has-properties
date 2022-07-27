@@ -52,3 +52,13 @@ it('marks attributes as unguarded and fillable by default', function ($user): vo
     expect($user->getFillable())->toHaveCount(6);
     expect($user->getGuarded())->toBeEmpty();
 })->with('unguardedUsers');
+
+it('will not add double-add guarded', function ($user): void {
+    expect($user->getGuarded())->toHaveCount(5);
+    expect(collect($user->getGuarded())->duplicates()->toArray())->toBeEmpty();
+})->with('guardedUsers');
+
+it('will not add double-add filled', function ($user): void {
+    expect($user->getFillable())->toHaveCount(5);
+    expect(collect($user->getFillable())->duplicates()->toArray())->toBeEmpty();
+})->with('users');

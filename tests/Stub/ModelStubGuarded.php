@@ -16,7 +16,7 @@ class ModelStubGuarded extends Model
 
     protected array $props = [
         'id' => ['casts' => 'string', 'attributes' => '1123'],
-        'name',
+        'name' => ['guarded'],
         'email' => ['fillable'],
         'password' => ['hidden'],
         'is_boolean' => ['casts' => 'boolean'],

@@ -4,7 +4,6 @@ namespace Inizio\HasProperties\Traits;
 
 use Illuminate\Support\Collection;
 use Inizio\HasProperties\Exceptions\PropArrayMissingException;
-use Inizio\HasProperties\Exceptions\GuardingFillablesException;
 
 trait HasProperties
 {
@@ -40,10 +39,6 @@ trait HasProperties
             $this->isFillable = $assign === 'guarded' || $assign === 'disallow' ? false : true;
             $this->isGuarded = $assign === 'guarded' || $assign === 'disallow' ? true : false;
             $this->isUnguarded = $assign === 'unguarded';
-        }
-
-        if ($this->isGuarded && $this->isFillable) {
-            throw new GuardingFillablesException('HasPropertyException: setting both isGuarded and isFillable to true makes no sense, use $massAssignment setting instead');
         }
     }
 

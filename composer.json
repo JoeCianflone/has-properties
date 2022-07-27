@@ -41,7 +41,7 @@
     },
     "scripts": {
         "test": "vendor/bin/pest",
-        "test-coverage": "vendor/bin/pest --coverage",
+        "test-coverage": "XDEBUG_MODE=coverage ./vendor/bin/pest --coverage --min=80",
         "check": "vendor/bin/phpstan analyse",
         "format": "vendor/bin/php-cs-fixer fix"
     },

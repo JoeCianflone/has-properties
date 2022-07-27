@@ -14,7 +14,7 @@ class ModelStub extends Model
 
     protected array $props = [
         'id' => ['casts' => 'string', 'attributes' => '1123'],
-        'name',
+        'name' => ['fillable'],
         'email' => ['guarded'],
         'password' => ['hidden'],
         'is_boolean' => ['casts' => 'boolean'],
