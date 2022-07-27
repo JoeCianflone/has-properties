@@ -35,24 +35,22 @@ trait HasProperties
 
     private function checkMassAssignment(): void
     {
-        if ($this->isGuarded && $this->isFillable) {
-            throw new GuardingFillablesException('HasPropertyException: setting both isGuarded and isFillable to true makes no sense, use $massAssignment setting instead');
+        if (property_exists($this, 'massAssignment')) {
+            $assign = strtolower($this->massAssignment);
+            $this->isFillable = $assign === 'guarded' || $assign === 'disallow' ? false : true;
+            $this->isGuarded = $assign === 'guarded' || $assign === 'disallow' ? true : false;
+            $this->isUnguarded = $assign === 'unguarded';
         }
 
-        if (property_exists($this, 'massAssignment')) {
-            if (strtolower($this->massAssignment) === 'guarded') {
-                $this->isFillable = false;
-                $this->isGuarded = true;
-            } elseif (strtolower($this->massAssignment) === 'unguarded') {
-                $this->isUnguarded = true;
-            }
+        if ($this->isGuarded && $this->isFillable) {
+            throw new GuardingFillablesException('HasPropertyException: setting both isGuarded and isFillable to true makes no sense, use $massAssignment setting instead');
         }
     }
 
     private function checkPropsArrayExists(): void
     {
         if ( ! property_exists($this, 'props')) {
-            throw new PropArrayMissingException('HasPropertyException: in class '.get_class($this).', $props does not exist');
+            throw new PropArrayMissingException('$props array does not exist in '.__CLASS__);
         }
     }
 
