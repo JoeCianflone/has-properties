@@ -50,7 +50,10 @@
         "dev:test": "vendor/bin/pest",
         "dev:test-coverage": "XDEBUG_MODE=coverage ./vendor/bin/pest --coverage --min=80",
         "dev:check": "vendor/bin/phpstan analyse",
-        "dev:format": "vendor/bin/php-cs-fixer fix"
+        "dev:format": "vendor/bin/php-cs-fixer fix",
+        "post-autoload-dump": [
+            "@php ./vendor/bin/testbench package:discover --ansi"
+        ]
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^3.8",
@@ -60,7 +63,6 @@
         "pestphp/pest": "^1.21",
         "pestphp/pest-plugin-faker": "^1.0",
         "pestphp/pest-plugin-laravel": "^1.2",
-        "pestphp/pest-plugin-mock": "^1.0",
         "phpunit/phpunit": "^9.5"
     }
 }

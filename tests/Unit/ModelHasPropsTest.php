@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
 use function Pest\Faker\faker;
-use JoeCianflone\HasProperties\Tests\Stub\EnumTestStub;
-use JoeCianflone\HasProperties\Tests\Stub\ModelNoProps;
-use JoeCianflone\HasProperties\Tests\Stub\ModelZeroProps;
-use JoeCianflone\HasProperties\Tests\Stub\ModelStubFilledGuarded;
+use JoeCianflone\HasProperties\Tests\Dummy\EnumTestStub;
+use JoeCianflone\HasProperties\Tests\Dummy\ModelNoProps;
+use JoeCianflone\HasProperties\Tests\Dummy\ModelZeroProps;
+use JoeCianflone\HasProperties\Tests\Dummy\ModelStubFilledGuarded;
 use JoeCianflone\HasProperties\Exceptions\PropArrayMissingException;
 use JoeCianflone\HasProperties\Exceptions\PropMassAssignmentException;
 

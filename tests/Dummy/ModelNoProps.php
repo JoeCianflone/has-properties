@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace JoeCianflone\HasProperties\Tests\Stub;
+namespace JoeCianflone\HasProperties\Tests\Dummy;
 
 use Illuminate\Database\Eloquent\Model;
 use JoeCianflone\HasProperties\Traits\HasProperties;

@@ -4,6 +4,10 @@
          bootstrap="vendor/autoload.php"
          colors="true"
 >
+    <php>
+        <env name="APP_KEY" value="base64:CQJfkVliCgCzCc0xmAwJXupsX/sppzY3CaXMjJT1Jg4="/>
+    </php>
+
     <testsuites>
         <testsuite name="Test Suite">
             <directory suffix="Test.php">./tests</directory>
@@ -11,7 +15,6 @@
     </testsuites>
     <coverage processUncoveredFiles="true">
         <include>
-            <directory suffix=".php">./app</directory>
             <directory suffix=".php">./src</directory>
         </include>
     </coverage>

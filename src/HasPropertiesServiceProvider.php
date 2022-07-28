@@ -11,30 +11,26 @@ class HasPropertiesServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        if ($this->app->runningInConsole()) {
-            $this->publishes([
-                $this->getConfigFile() => config_path('hasproperties.php'),
-            ], 'config');
-        }
-
-        // $this->app->booted(function ($app): void {
-        //     $app->make(SettingsProvider::class)->provide();
-        // });
+        // if ($this->app->runningInConsole()) {
+        //     $this->publishes([
+        //         $this->getConfigFile() => config_path('has-properties.php'),
+        //     ], 'config');
+        // }
     }
 
     public function register(): void
     {
-        $this->mergeConfigFrom(
-            $this->getConfigFile(),
-            'hasproperties'
-        );
+        // $this->mergeConfigFrom(
+        //     $this->getConfigFile(),
+        //     'has-properties'
+        // );
     }
 
-    /**
+    /*
      * @return string
      */
-    protected function getConfigFile(): string
-    {
-        return __DIR__.DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'config'.DIRECTORY_SEPARATOR.'hasproperties.php';
-    }
+    // protected function getConfigFile(): string
+    // {
+    //     return __DIR__.DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'config'.DIRECTORY_SEPARATOR.'has-properties.php';
+    // }
 }

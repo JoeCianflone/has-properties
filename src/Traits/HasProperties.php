@@ -3,7 +3,7 @@
 namespace JoeCianflone\HasProperties\Traits;
 
 use Illuminate\Support\Collection;
-use JoeCianflone\HasProperties\MassAssignment;
+use JoeCianflone\HasProperties\Support\MassAssignment;
 use JoeCianflone\HasProperties\Exceptions\PropArrayMissingException;
 
 trait HasProperties

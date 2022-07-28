@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5ddc997454d580cbcbf82c65b25075bd",
+    "content-hash": "7ae2dbcecb77ce1538450e8df81d6b41",
     "packages": [
         {
             "name": "brick/math",
@@ -572,16 +572,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v9.22.0",
+            "version": "v9.22.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "b30095050b9409669a38cd0fee3c3a273266277e"
+                "reference": "b3b3dd43b9899f23df6d1d3e5390bd4662947a46"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/b30095050b9409669a38cd0fee3c3a273266277e",
-                "reference": "b30095050b9409669a38cd0fee3c3a273266277e",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/b3b3dd43b9899f23df6d1d3e5390bd4662947a46",
+                "reference": "b3b3dd43b9899f23df6d1d3e5390bd4662947a46",
                 "shasum": ""
             },
             "require": {
@@ -748,7 +748,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2022-07-26T13:30:21+00:00"
+            "time": "2022-07-26T16:16:33+00:00"
         },
         {
             "name": "laravel/serializable-closure",
@@ -1247,16 +1247,16 @@
         },
         {
             "name": "nesbot/carbon",
-            "version": "2.59.1",
+            "version": "2.60.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/briannesbitt/Carbon.git",
-                "reference": "a9000603ea337c8df16cc41f8b6be95a65f4d0f5"
+                "reference": "00a259ae02b003c563158b54fb6743252b638ea6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/a9000603ea337c8df16cc41f8b6be95a65f4d0f5",
-                "reference": "a9000603ea337c8df16cc41f8b6be95a65f4d0f5",
+                "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/00a259ae02b003c563158b54fb6743252b638ea6",
+                "reference": "00a259ae02b003c563158b54fb6743252b638ea6",
                 "shasum": ""
             },
             "require": {
@@ -1345,7 +1345,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-06-29T21:43:55+00:00"
+            "time": "2022-07-27T15:57:48+00:00"
         },
         {
             "name": "nette/schema",
@@ -6137,79 +6137,6 @@
                 }
             ],
             "time": "2022-01-13T17:09:04+00:00"
-        },
-        {
-            "name": "pestphp/pest-plugin-mock",
-            "version": "v1.0.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/pestphp/pest-plugin-mock.git",
-                "reference": "c2dbca6cb85a870f2e666d01aca0a3fdca7d063c"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/pestphp/pest-plugin-mock/zipball/c2dbca6cb85a870f2e666d01aca0a3fdca7d063c",
-                "reference": "c2dbca6cb85a870f2e666d01aca0a3fdca7d063c",
-                "shasum": ""
-            },
-            "require": {
-                "mockery/mockery": "^1.4",
-                "pestphp/pest": "^1.0",
-                "pestphp/pest-plugin": "^1.0",
-                "php": "^8.0"
-            },
-            "require-dev": {
-                "pestphp/pest-dev-tools": "dev-master"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.x-dev"
-                }
-            },
-            "autoload": {
-                "files": [
-                    "src/Autoload.php"
-                ],
-                "psr-4": {
-                    "Pest\\Mock\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "Adds mocking capabilities to Pest or PHPUnit",
-            "keywords": [
-                "framework",
-                "mock",
-                "mocking",
-                "pest",
-                "php",
-                "plugin",
-                "test",
-                "testing",
-                "unit"
-            ],
-            "support": {
-                "issues": "https://github.com/pestphp/pest-plugin-mock/issues",
-                "source": "https://github.com/pestphp/pest-plugin-mock/tree/v1.0.3"
-            },
-            "funding": [
-                {
-                    "url": "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=66BYDWAT92N6L",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://github.com/nunomaduro",
-                    "type": "github"
-                },
-                {
-                    "url": "https://www.patreon.com/nunomaduro",
-                    "type": "patreon"
-                }
-            ],
-            "time": "2021-06-10T18:04:11+00:00"
         },
         {
             "name": "phar-io/manifest",

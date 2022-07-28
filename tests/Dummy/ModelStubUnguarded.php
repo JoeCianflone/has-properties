@@ -1,13 +1,13 @@
 <?php declare(strict_types=1);
 
-namespace JoeCianflone\HasProperties\Tests\Stub;
+namespace JoeCianflone\HasProperties\Tests\Dummy;
 
 use Illuminate\Database\Eloquent\Model;
-use JoeCianflone\HasProperties\MassAssignment;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use JoeCianflone\HasProperties\Traits\HasProperties;
+use JoeCianflone\HasProperties\Support\MassAssignment;
 
-class ModelStubGuarded extends Model
+class ModelStubUnguarded extends Model
 {
     use HasProperties;
 
@@ -15,8 +15,8 @@ class ModelStubGuarded extends Model
 
     protected array $props = [
         'id' => ['casts' => 'string', 'attributes' => '1123'],
-        'name' => ['guarded'],
-        'email' => ['fillable'],
+        'name',
+        'email',
         'password' => ['hidden'],
         'is_boolean' => ['casts' => 'boolean'],
         'is_enum' => ['casts' => EnumTestStub::class, 'attributes' => EnumTestStub::ONE],
@@ -25,8 +25,8 @@ class ModelStubGuarded extends Model
     protected function setMassAssignment(): MassAssignment
     {
         return new MassAssignment(
-            fillable: false,
-            guarded: true,
+            fillable: true,
+            unguarded: true
         );
     }
 
