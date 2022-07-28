@@ -7,9 +7,9 @@ use JoeCianflone\HasProperties\Exceptions\PropMassAssignmentException;
 class MassAssignment
 {
     public function __construct(
-        private ?bool $fillable = true,
-        private ?bool $guarded = false,
-        private ?bool $unguarded = false,
+        private bool $fillable = true,
+        private bool $guarded = false,
+        private bool $unguarded = false,
     ) {
         if ($this->fillable && $this->guarded) {
             throw new PropMassAssignmentException('Cannot set properties to both Fillable AND Guarded');
