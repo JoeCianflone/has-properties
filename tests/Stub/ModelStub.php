@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace Inizio\HasProperties\Tests\Stub;
+namespace JoeCianflone\HasProperties\Tests\Stub;
 
 use Illuminate\Database\Eloquent\Model;
-use Inizio\HasProperties\Traits\HasProperties;
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use JoeCianflone\HasProperties\Traits\HasProperties;
 
 class ModelStub extends Model
 {

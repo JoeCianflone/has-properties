@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
 use function Pest\Faker\faker;
-use Inizio\HasProperties\Tests\Stub\EnumTestStub;
-use Inizio\HasProperties\Tests\Stub\ModelNoProps;
+use JoeCianflone\HasProperties\Tests\Stub\EnumTestStub;
+use JoeCianflone\HasProperties\Tests\Stub\ModelNoProps;
 
 it('throws exception if no props are set', function (): void {
     $m = new ModelNoProps();

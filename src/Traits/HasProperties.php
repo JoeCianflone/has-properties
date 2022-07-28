@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace Inizio\HasProperties\Traits;
+namespace JoeCianflone\HasProperties\Traits;
 
 use Illuminate\Support\Collection;
-use Inizio\HasProperties\Exceptions\PropArrayMissingException;
+use JoeCianflone\HasProperties\Exceptions\PropArrayMissingException;
 
 trait HasProperties
 {

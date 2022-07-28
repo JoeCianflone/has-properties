@@ -1,8 +1,8 @@
 {
-    "name": "inizio/has-properties",
+    "name": "joecianflone/has-properties",
     "description": "Set all your Eloquent model properties in one place",
     "keywords": [
-        "inizio",
+        "JoeCianflone",
         "laravel",
         "traits",
         "eloquent",
@@ -13,12 +13,12 @@
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "Inizio\\HasProperties\\": "src/"
+            "JoeCianflone\\HasProperties\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Inizio\\HasProperties\\Tests\\": "tests"
+            "JoeCianflone\\HasProperties\\Tests\\": "tests"
         }
     },
     "authors": [

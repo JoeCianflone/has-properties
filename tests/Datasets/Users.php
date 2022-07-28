@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
 use function Pest\Faker\faker;
-use Inizio\HasProperties\Tests\Stub\ModelStub;
-use Inizio\HasProperties\Tests\Stub\ModelStubGuarded;
-use Inizio\HasProperties\Tests\Stub\ModelStubUnguarded;
+use JoeCianflone\HasProperties\Tests\Stub\ModelStub;
+use JoeCianflone\HasProperties\Tests\Stub\ModelStubGuarded;
+use JoeCianflone\HasProperties\Tests\Stub\ModelStubUnguarded;
 
 $guardedUser = new ModelStubGuarded();
 $guardedUser->name = faker()->name();

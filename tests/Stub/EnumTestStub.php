@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Inizio\HasProperties\Tests\Stub;
+namespace JoeCianflone\HasProperties\Tests\Stub;
 
 enum EnumTestStub: string
 {
