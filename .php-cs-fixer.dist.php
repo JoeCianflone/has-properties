@@ -163,10 +163,6 @@ $finder = Finder::create()
     ->exclude('vendor')
     ->in([
         __DIR__.'/src',
-        // __DIR__.'/config',
-        // __DIR__.'/database',
-        // __DIR__.'/resources',
-        // __DIR__.'/routes',
         __DIR__.'/tests',
     ])
     ->name('*.php')
@@ -178,4 +174,4 @@ return (new Config())
     ->setFinder($finder)
     ->setRules($rules)
     ->setRiskyAllowed(true)
-    ->setUsingCache(true);
+    ->setUsingCache(false);
