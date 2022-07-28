@@ -3,10 +3,21 @@
 use function Pest\Faker\faker;
 use JoeCianflone\HasProperties\Tests\Stub\EnumTestStub;
 use JoeCianflone\HasProperties\Tests\Stub\ModelNoProps;
+use JoeCianflone\HasProperties\Tests\Stub\ModelZeroProps;
+use JoeCianflone\HasProperties\Tests\Stub\ModelStubFilledGuarded;
+use JoeCianflone\HasProperties\Exceptions\PropArrayMissingException;
+use JoeCianflone\HasProperties\Exceptions\PropMassAssignmentException;
 
 it('throws exception if no props are set', function (): void {
     $m = new ModelNoProps();
-})->throws(Exception::class);
+})->throws(PropArrayMissingException::class);
+
+it('does not run on empty array', function (): void {
+    $m = new ModelZeroProps();
+    expect($m->getAttributes())->toBeArray()->toHaveCount(0);
+    expect($m->getFillable())->toBeArray()->toHaveCount(0);
+    expect($m->getGuarded())->toBeArray()->toHaveCount(1);
+});
 
 it('hides attributes marked as hidden', function ($user): void {
     expect($user->toArray())->not()->toHaveKeys(['password']);
@@ -42,6 +53,10 @@ it('marks attributes as guarded if passed guarded', function ($user): void {
     expect($user->getGuarded())->toHaveCount(1);
     expect($user->getFillable())->not()->toHaveKey('email');
 })->with('users');
+
+it('throws exception if marked as guarded and fillable', function (): void {
+    $m = new ModelStubFilledGuarded();
+})->throws(PropMassAssignmentException::class);
 
 it('marks attributes as guarded by default', function ($user): void {
     expect($user->getGuarded())->toHaveCount(5);

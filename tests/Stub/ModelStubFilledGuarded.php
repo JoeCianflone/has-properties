@@ -7,7 +7,7 @@ use JoeCianflone\HasProperties\MassAssignment;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use JoeCianflone\HasProperties\Traits\HasProperties;
 
-class ModelStubGuarded extends Model
+class ModelStubFilledGuarded extends Model
 {
     use HasProperties;
 
@@ -25,7 +25,7 @@ class ModelStubGuarded extends Model
     protected function setMassAssignment(): MassAssignment
     {
         return new MassAssignment(
-            fillable: false,
+            fillable: true,
             guarded: true,
         );
     }

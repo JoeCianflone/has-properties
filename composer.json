@@ -39,11 +39,18 @@
             "phpstan/extension-installer": true
         }
     },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "JoeCianflone\\HasProperties\\HasPropertiesServiceProvider"
+            ]
+        }
+    },
     "scripts": {
-        "test": "vendor/bin/pest",
-        "test-coverage": "XDEBUG_MODE=coverage ./vendor/bin/pest --coverage --min=80",
-        "check": "vendor/bin/phpstan analyse",
-        "format": "vendor/bin/php-cs-fixer fix"
+        "dev:test": "vendor/bin/pest",
+        "dev:test-coverage": "XDEBUG_MODE=coverage ./vendor/bin/pest --coverage --min=80",
+        "dev:check": "vendor/bin/phpstan analyse",
+        "dev:format": "vendor/bin/php-cs-fixer fix"
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^3.8",

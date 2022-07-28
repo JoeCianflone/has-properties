@@ -3,6 +3,7 @@ includes:
 parameters:
     paths:
         - src
+        - tests
     level: 9
     checkMissingIterableValueType: false
     noUnnecessaryCollectionCall: true

@@ -1,5 +1,7 @@
 <?php declare(strict_types=1);
 
+use Illuminate\Foundation\Testing\TestCase;
+
 /*
 |--------------------------------------------------------------------------
 | Test Case
@@ -10,6 +12,8 @@
 | need to change it using the "uses()" function to bind a different classes or traits.
 |
 */
+
+uses(TestCase::class);
 
 /*
 |--------------------------------------------------------------------------

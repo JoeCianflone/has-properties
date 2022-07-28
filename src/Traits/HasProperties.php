@@ -3,50 +3,46 @@
 namespace JoeCianflone\HasProperties\Traits;
 
 use Illuminate\Support\Collection;
+use JoeCianflone\HasProperties\MassAssignment;
 use JoeCianflone\HasProperties\Exceptions\PropArrayMissingException;
 
 trait HasProperties
 {
-    private bool $isFillable = true;
+    private MassAssignment $massAssignment;
 
-    private bool $isGuarded = false;
-
-    private bool $isUnguarded = false;
+    protected function setMassAssignment(): MassAssignment
+    {
+        return new MassAssignment();
+    }
 
     protected function initializeHasProperties(): void
     {
-        $this->checkMassAssignment();
-        $this->checkPropsArrayExists();
+        $this->props = $this->getProps();
+        $this->massAssignment = $this->setMassAssignment();
 
-        if (count($this->props) > 0) {
-            $normalized = $this->generateProperties($this->props);
+        if (count($this->props) <= 0) {
+            return;
+        }
 
-            $this->attributes = $normalized['attributes'];
-            $this->setHidden($normalized['hidden']);
-            $this->mergeCasts($normalized['casts']);
-            $this->fillable($normalized['fillable']);
+        $normalized = $this->generateProperties($this->props);
 
-            if ($this->isUnguarded || count($normalized['guarded']) > 0) {
-                $this->guard($normalized['guarded']);
-            }
+        $this->attributes = $normalized['attributes'];
+        $this->setHidden($normalized['hidden']);
+        $this->mergeCasts($normalized['casts']);
+        $this->fillable($normalized['fillable']);
+
+        if ($this->massAssignment->isUnguarded() || count($normalized['guarded']) > 0) {
+            $this->guard($normalized['guarded']);
         }
     }
 
-    private function checkMassAssignment(): void
-    {
-        if (property_exists($this, 'massAssignment')) {
-            $assign = strtolower($this->massAssignment);
-            $this->isFillable = $assign === 'guarded' || $assign === 'disallow' ? false : true;
-            $this->isGuarded = $assign === 'guarded' || $assign === 'disallow' ? true : false;
-            $this->isUnguarded = $assign === 'unguarded';
-        }
-    }
-
-    private function checkPropsArrayExists(): void
+    private function getProps(): array
     {
         if ( ! property_exists($this, 'props')) {
             throw new PropArrayMissingException('$props array does not exist in '.__CLASS__);
         }
+
+        return $this->props;
     }
 
     private function generateProperties(array $props): array
@@ -77,14 +73,18 @@ trait HasProperties
         }, $initialPropArray);
     }
 
-    private function setGuardedOrFillable($acc, $prop): array
+    private function setGuardedOrFillable(array $acc, mixed $prop): array
     {
-        if ($this->isFillable && ! in_array($prop, $acc['guarded']) && ! in_array($prop, $acc['fillable'])) {
+        if ($this->massAssignment->isFillable() && ! in_array($prop, $acc['guarded']) && ! in_array($prop, $acc['fillable'])) {
             $acc['fillable'][] = $prop;
+
+            return $acc;
         }
 
-        if ($this->isGuarded && ! in_array($prop, $acc['fillable']) && ! in_array($prop, $acc['guarded'])) {
+        if ($this->massAssignment->isGuarded() && ! in_array($prop, $acc['fillable']) && ! in_array($prop, $acc['guarded'])) {
             $acc['guarded'][] = $prop;
+
+            return $acc;
         }
 
         return $acc;

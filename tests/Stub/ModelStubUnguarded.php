@@ -3,6 +3,7 @@
 namespace JoeCianflone\HasProperties\Tests\Stub;
 
 use Illuminate\Database\Eloquent\Model;
+use JoeCianflone\HasProperties\MassAssignment;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use JoeCianflone\HasProperties\Traits\HasProperties;
 
@@ -12,8 +13,6 @@ class ModelStubUnguarded extends Model
 
     public $incrementing = false;
 
-    protected $massAssignment = 'unguarded';
-
     protected array $props = [
         'id' => ['casts' => 'string', 'attributes' => '1123'],
         'name',
@@ -22,6 +21,14 @@ class ModelStubUnguarded extends Model
         'is_boolean' => ['casts' => 'boolean'],
         'is_enum' => ['casts' => EnumTestStub::class, 'attributes' => EnumTestStub::ONE],
     ];
+
+    protected function setMassAssignment(): MassAssignment
+    {
+        return new MassAssignment(
+            fillable: true,
+            unguarded: true
+        );
+    }
 
     protected function password(): Attribute
     {
