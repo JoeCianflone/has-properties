@@ -36,6 +36,11 @@ trait HasProperties
         }
     }
 
+    protected function getPropKeys(): array
+    {
+        return collect($this->props)->map(fn ($v, $k) => is_int($k) ? $v : $k)->values()->toArray();
+    }
+
     private function getProps(): array
     {
         if ( ! property_exists($this, 'props')) {
